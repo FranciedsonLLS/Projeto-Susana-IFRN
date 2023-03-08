@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+     <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="{% static 'styles.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script>
+</head>
+
+<body onload="gerargrafico()" style="background-color: #92adc7;">
+    <header>
+    
+       
+        <nav class="navbar col-12 fixed-top navbar-expand-lg  " style="z-index: 999; background-color: #7089a2;">
+          <div class="container-fluid col-11 m-auto" style="height: 80px;">
+            <a class="navbar-brand" href="{% url 'index' %}">
+              <img src="{% static 'logo_susana.png'%}" alt="Logo" width="70" height="70" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="font-size: 20px; color: black" >Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'selecionar' %}"  style="font-size: 20px; color: rgb(28, 27, 27);">Bot</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'grafico' %}"  style="font-size: 20px; color: rgb(28, 27, 27);">Gráficos</a>
+                </li>
+          
+              </ul>
+             
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #1c4d87; border-color: #1c4d87;">
+            {{ request.user.name }}
+        </button>
+        <ul class="dropdown-menu">
+          
+          <li><a class="dropdown-item" href="{% url 'url_edit_profile' request.user.id %}">Editar perfil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{% url 'auth.logout' %}">Sair</a></li>
+        </ul>
+      </div>
+            </div>
+          </div>
+        </nav>
+      
+    </header>
+    
+    <main>
+      <h1 style="color: rgb(255, 255, 255); margin-top: 10%; text-align: center;">Escolha o gráfico que deseja analisar</h1>
+      <div style="text-align: center; margin-top: -15%;">
+      <a href="{% url 'grafico' %}"><button type="button"  class="btn btn-primary btn-lg"  style="background-color: #1c4d87; border-color: #1c4d87; margin-top: 20%;">Hipertensão e Diabetes</button></a>
+      <a href="{% url 'grafico-hipertensao' %}"><button type="button"  class="btn btn-primary btn-lg" style="background-color: #1c4d87; border-color: #1c4d87; margin-top: 20%;">Hipertensão</button></a>
+      <a href="{% url 'grafico-diabetes-t1' %}"><button type="button"  class="btn btn-primary btn-lg" style="background-color: #1c4d87; border-color: #1c4d87; margin-top: 20%;">Diabetes tipo 1</button></a>
+      <a href="{% url 'grafico-diabetes-t2' %}"><button type="button"  class="btn btn-primary btn-lg" style="background-color: #1c4d87; border-color: #ffffff; margin-top: 20%;  border: solid 3px;">Diabetes tipo 2</button></a>
+      </div>
+  </main>
+
+    <div id = "grafico" style="margin-top: 130px;"></div>
+    
+    <script>
+    function gerargrafico(){
+
+        var estados = ["Acre","Alagoas","Amazonas","Amapá","Bahia","Ceará","Distrito Federal","Espírito Santo","Goiás","Maranhão","Mato Grosso","Mato Grosso do Sul","Minas Gerais","Pará","Paraíba","Paraná","Pernambuco","Piauí","Rio de Janeiro","Rio Grande do Norte","Rio Grande do Sul","Rondônia","Roraíma","Santa Catarina","São Paulo","Sergipe","Tocantins",]
+        var meses_estados = [];
+        var aux = 0;
+        posicao = 1;
+        var graf = [];
+            {%  for valor in chave %} 
+                meses_estados.push({{ valor }})
+                if (posicao % 12 == 0) {
+                    graf[Math.trunc(posicao/12)-1] = {
+                        x: ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
+                        y: meses_estados,
+                        mode: "lines+markers",
+                        type: "scatter",
+                        name: estados[Math.trunc(posicao/12)-1]
+
+                    }
+                    meses_estados = [];
+                }
+                posicao++;
+            {% endfor %}
+        var data = [graf[0],graf[1],graf[2],graf[3],graf[4],graf[5],graf[6],graf[7],graf[8],graf[9],graf[10],graf[11],graf[12],graf[13],graf[14],graf[15],graf[16],graf[17],graf[18],graf[19],graf[20],graf[21],graf[22],graf[23],graf[24],graf[25],graf[26]];
+        var layout = {
+            title: {
+    text:'Gráfico Diabetes tipo 2',
+    font: {
+      family: 'Courier New, monospace',
+      size: 50,
+      color: '#000000'
+    }},
+
+    xaxis: {
+    title: {
+      text: 'Meses',
+      font: {
+        family: 'Courier New, monospace',
+        size: 30,
+        color: '#000000'
+      }
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Casos totais',
+      font: {
+        family: 'Courier New, monospace',
+        size: 30,
+        color: '#000000'
+      }
+    }
+  }
+,
+            
+            
+            autosize: true,
+            
+            height: 800,
+            margin: {
+            l: 100,
+            r: 50,
+            b: 100,
+            t: 100,
+            pad: 4
+                    },
+            paper_bgcolor: '#92adc7',
+            plot_bgcolor: '#c7c7c7'
+        };
+
+        Plotly.newPlot('grafico',data,layout);
+    }
+    </script>
+</body>
+</html>

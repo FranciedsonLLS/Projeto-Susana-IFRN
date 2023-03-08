@@ -1,0 +1,9 @@
+Para rodar corretamente o projeto, instale o requirements.txt.
+
+Mude os caminhos que estão presentes no código, nas views dos gráficos e do bot.
+Nas views do gráfico deixe as tabelas na pasta de downloads e apenas precisará mudar o nome do seu usuário no caminho
+
+Na view do bot você terá de mudar o caminho nas variáveis caminho e nas partes em que renomeia-se o arquivo
+É possível vêr esses lugares no comentários do código 
+
+É necessário possuir as tabelas de hiperdia para rodar os gráficos

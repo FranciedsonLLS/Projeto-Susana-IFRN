@@ -1,0 +1,173 @@
+<html lang="pt-br">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bot</title>
+    <link href="{% static 'selecionar.css' %}" rel="stylesheet">
+         <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+    
+       
+        <nav class="navbar col-12 fixed-top navbar-expand-lg  " style="z-index: 999; background-color: #7089a2;">
+          <div class="container-fluid col-11 m-auto" style="height: 80px;">
+            <a class="navbar-brand" href="{% url 'index' %}">
+              <img src="{% static 'logo_susana.png'%}" alt="Logo" width="70" height="70" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="font-size: 20px; color: black" >Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'selecionar' %}"  style="font-size: 20px; color: rgb(28, 27, 27);">Bot</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'grafico' %}"  style="font-size: 20px; color: rgb(28, 27, 27);">Gráficos</a>
+                </li>
+          
+              </ul>
+             
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #1c4d87; border-color: #1c4d87;">
+            {{ request.user.name }}
+        </button>
+        <ul class="dropdown-menu">
+          
+          <li><a class="dropdown-item" href="{% url 'url_edit_profile' request.user.id %}">Editar perfil</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{% url 'auth.logout' %}">Sair</a></li>
+        </ul>
+      </div>
+            </div>
+          </div>
+        </nav>
+      
+    </header>
+    
+    
+    <div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+				
+				<div class="d-flex justify-content-center form_container">
+
+    <form >
+    <label style="margin-top: -10%; color: rgb(255, 255, 255);">Selecionar estados para baixar as tabelas</label>
+        <select class="form-select" style="margin-top: 5%;" name="viagem" id="p1">
+            <option value=1>Acre</option>
+            <option value=2>Alagoas</option>
+            <option value=3>Amazonas</option>
+            <option value=4>Amapá</option>
+            <option value=5>Bahia</option>
+            <option value=6>Ceará</option>
+            <option value=7>Distrito Federal</option>
+            <option value=8>Espirito Santo</option>
+            <option value=9>Goiás</option>
+            <option value=10>Maranhão</option>
+            <option value=11>Mato Grosso</option>
+            <option value=12>Mato Grosso do Sul</option>
+            <option value=13>Minas Gerais</option>
+            <option value=14>Pará</option>
+            <option value=15>Paraíba</option>
+            <option value=16>Parana</option>
+            <option value=17>Pernambuco</option>
+            <option value=18>Piauí</option>
+            <option value=19>Rio de Janeiro</option>
+            <option value=20>Rio Grande do Norte</option>
+            <option value=21>Rio Grande do Sul</option>
+            <option value=22>Rondônia</option>
+            <option value=23>Roraíma</option>
+            <option value=24>Santa Catarina</option>
+            <option value=25>São Paulo</option>
+            <option value=26>Sergipe</option>
+            <option value=27>Tocantins</option>
+        </select>
+        <select class="form-select" style="margin-top: 5%;"  name="viagem" id="p2">
+          <option value=1>Acre</option>
+          <option value=2>Alagoas</option>
+          <option value=3>Amazonas</option>
+          <option value=4>Amapá</option>
+          <option value=5>Bahia</option>
+          <option value=6>Ceará</option>
+          <option value=7>Distrito Federal</option>
+          <option value=8>Espirito Santo</option>
+          <option value=9>Goiás</option>
+          <option value=10>Maranhão</option>
+          <option value=11>Mato Grosso</option>
+          <option value=12>Mato Grosso do Sul</option>
+          <option value=13>Minas Gerais</option>
+          <option value=14>Pará</option>
+          <option value=15>Paraíba</option>
+          <option value=16>Parana</option>
+          <option value=17>Pernambuco</option>
+          <option value=18>Piauí</option>
+          <option value=19>Rio de Janeiro</option>
+          <option value=20>Rio Grande do Norte</option>
+          <option value=21>Rio Grande do Sul</option>
+          <option value=22>Rondônia</option>
+          <option value=23>Roraíma</option>
+          <option value=24>Santa Catarina</option>
+          <option value=25>São Paulo</option>
+          <option value=26>Sergipe</option>
+          <option value=27>Tocantins</option>
+        </select>    
+
+        
+        <div class="d-flex justify-content-center mt-3 login_container">
+            <button onclick="botao(), alerta()" type="submit" name="button" class="btn login_btn">Baixar</button>
+          </div>
+
+          
+
+    </form>
+    
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+    <script>
+        function botao() {
+            p1_val = document.getElementById("p1").value
+            p2_val = document.getElementById("p2").value
+
+            //var opcao1 = p1_val.options[select.selectedIndex].value;
+            //var opcao2 = p2_val.options[select.selectedIndex].value;
+
+
+            url = "/bot/" + p1_val + "/" + p2_val
+            window.location.assign(url)
+        }
+
+        function alerta() {
+            alert('Suas tabelas estão sendo baixadas, aguarde e confira na sua pasta Downloads!')
+
+        }
+
+    </script>
+</body>
+</html>
